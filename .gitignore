@@ -1,2 +1,2 @@
 *.pyc
-QUOTE_DASH/
+__pycache__/
