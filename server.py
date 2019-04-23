@@ -133,7 +133,7 @@ def update(id3):
         flash("Last name must be longer than 2 characters.")
         is_vaild= False
     if not re.match(EMAIL_REGEX, request.form['email_E']):
-        flash("Please input a valid email address.")
+        flash("Please a valid email address.")
         is_vaild= False
     if is_vaild == True:
         mysql = connectToMySQL('quote_dash')

@@ -1,4 +1,2 @@
-__pycache__/
-*.pyc
-QUOTE_DASH/
-*.db
+  *.pyc
+  QUOTE_DASH/
