@@ -1,3 +1,2 @@
-  __pycache__/
-  *.pyc
-  QUOTE_DASH/
+__pycache__/
+*.pyc
