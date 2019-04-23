@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Wall</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Quote Dash</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <span class="navbar-text">
+            Wellcome, {{session['greeting']}}<a href="/logout" role="button" class="btn btn-info">Logout</a> 
+          </span>
+        </div>
+        <a href="myaccount/{{session['user_id']}}" role="button" class="btn btn-info">Eidt My Account</a>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+            <h1>Quotes</h1>
+            {% for quote in quotes %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <p>{{quote['author']}} : {{quote['content']}}</p>
+                  <p>Posted by: <a href="/users/{{quote['creator']}}" class="badge badge-primary">{{quote['first_name']}} {{quote['last_name']}}</a></p>
+                  {% if quote['creator'] == session['user_id'] %}
+                    <a href="/delete/{{quote['id']}}" class="badge badge-danger">Delete</a>
+                  {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="col-6">
+            <h1>Add a quote</h1>
+            {% with messages = get_flashed_messages() %}    
+            {% if messages %}               
+            {% for message in messages %}   
+              <p style="color: red; font-size: .8em;">{{message}}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <form action='/create' method='post'>
+                <div class="form-group">
+                    <label for="author_lab">Author</label>
+                    <input type="text" class="form-control w-50" name="author">
+                </div>
+                <div class="form-group">
+                    <label for="content_lab">Quote</label>
+                    <input type="text" class="form-control" name="content">
+                </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+    </div>
+</body>
+</html>
